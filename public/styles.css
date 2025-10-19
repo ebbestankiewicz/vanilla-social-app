@@ -1,0 +1,15 @@
+body {
+    font-family: system-ui, sans-serif;
+    background: #0b0d10;
+    color: #e9eef5;
+    margin: 0;
+    padding: 2rem;
+}
+a { color: #7cc0ff; }
+.container { max-width: 600px; margin: 0 auto; }
+
+.grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
