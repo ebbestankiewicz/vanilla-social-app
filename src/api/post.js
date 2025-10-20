@@ -15,10 +15,12 @@ export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
 /**
  * Create a post.
  */
-export function createPost({ title, body, media = [] }) {
-    return http(POSTS_BASE, {
+export function createPost({ title, body, media }) {
+    const payload = { title, body };
+    if (media) payload.media = media;
+    return http(`${BASE_API_URL}/social/posts`, {
         method: "POST",
-        body: JSON.stringify({ title, body, media }),
+        body: JSON.stringify(payload),
     });
 }
 
@@ -39,9 +41,11 @@ export function getPost(id) {
 /**
  * Update a post by ID.
  */
-export function updatePost(id, data) {
-    return http(`${POSTS_BASE}/${id}`, {
+export function updatePost(id, { title, body, media }) {
+    const payload = { title, body };
+    if (media !== undefined) payload.media = media; // set to {url,...} or null to clear
+    return http(`${BASE_API_URL}/social/posts/${id}`, {
         method: "PUT",
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
     });
 }

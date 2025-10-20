@@ -8,6 +8,6 @@ export const POSTS_URL = `${BASE_API_URL}/social/posts`;
 
 
 export const STORAGE_KEYS = {
-    token: "ns_token",
+    token: "accessToken",
     profile: "ns_profile",
 };

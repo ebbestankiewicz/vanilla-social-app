@@ -23,6 +23,11 @@ function postCard(post) {
 
     const title = document.createElement("h3");
     title.textContent = post.title || "(untitled)";
+    title.style.cursor = "pointer";
+    title.addEventListener("click", () => {
+    location.href = `./post.html?id=${post.id}`;
+});
+
     const body = document.createElement("p");
     body.textContent = post.body || "";
 
@@ -98,7 +103,7 @@ if (createForm) {
             const title = String(fd.get("title") || "").trim();
             const body = String(fd.get("body") || "").trim() || undefined;
             const mediaUrl = String(fd.get("mediaUrl") || "").trim();
-            const media = mediaUrl ? [{ url: mediaUrl }] : [];
+            const media = mediaUrl ? [{ url: mediaUrl }] : undefined;
 
             if (!title) throw new Error("Title is required.");
 
