@@ -1,8 +1,9 @@
+// src/api/http.js
 import { NOROFF_API_KEY } from "../config.js";
+import { getFromLocalStorage } from "../utils/storage.js";
 
 /**
- * Tiny fetch wrapper: JSON headers + optional API key.
- * If we later add a token, we can set it here as well.
+ * Tiny fetch wrapper: JSON headers + X-Noroff-API-Key + (optional) Bearer token.
  * @param {RequestInfo} url
  * @param {RequestInit} [opts]
  * @returns {Promise<any>}
@@ -15,6 +16,9 @@ export async function http(url, opts = {}) {
 
     if (NOROFF_API_KEY) headers.set("X-Noroff-API-Key", NOROFF_API_KEY);
 
+    const token = getFromLocalStorage("accessToken");
+    if (token) headers.set("Authorization", `Bearer ${token}`);
+
     const res = await fetch(url, { ...opts, headers });
     const isJSON = res.headers.get("Content-Type")?.includes("application/json");
     const body = isJSON ? await res.json() : await res.text();
@@ -25,3 +29,4 @@ export async function http(url, opts = {}) {
     }
     return body;
 }
+
