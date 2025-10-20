@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="./register.html">Register</a>
+            <a href="./login.html">Login</a>
+        </nav>
+    </header>
+    <main class="container">
+        <h1>Login account</h1>
+        <form id="login-form" class="grid" novalidate>
+            <input name="email" type="email" placeholder="Email (@stud.noroff.no)" required value="Handball123@stud.noroff.no"/>
+            <input name="password" type="password" placeholder="Password (min 8 chars)" minlength="8" required value="Testing123"/>
+            <button type="submit">Login</button>
+            <small>Need an account? <a href="./register.html">Register</a></small>
+        </form>
+        <p id="msg"></p>
+        <p><a href="./index.html">← Back to home</a></p>
+    </main>
+    <script type="module" src="../src/pages/login.js"></script>
+</body>
+</html>

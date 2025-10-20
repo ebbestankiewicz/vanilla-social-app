@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="./register.html">Register</a>
+            <a href="./login.html">Login</a>
+        </nav>
+    </header>
     <main class="container">
         <h1>Create account</h1>
-        <form id="regForm" class="grid" novalidate>
-            <input name="name" placeholder="Username (letters, numbers, _)" required />
-            <input name="email" type="email" placeholder="Email (@stud.noroff.no)" required />
-            <input name="password" type="password" placeholder="Password (min 8 chars)" minlength="8" required />
+        <form id="register-form" class="grid" novalidate>
+            <input name="name" placeholder="Username" required value="Handball123"/>
+            <input name="email" type="email" placeholder="Email (@stud.noroff.no)" required value="Handball123@stud.noroff.no"/>
+            <input name="password" type="password" placeholder="Password (min 8 chars)" minlength="8" required value="Testing123"/>
 
             <textarea name="bio" maxlength="160" placeholder="Bio (optional, max 160)"></textarea>
 
