@@ -1,4 +1,3 @@
-// src/api/http.js
 import { NOROFF_API_KEY } from "../config.js";
 import { getFromLocalStorage } from "../utils/storage.js";
 
