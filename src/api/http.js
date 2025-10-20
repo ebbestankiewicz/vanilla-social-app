@@ -1,4 +1,4 @@
-import { NOROFF_API_KEY } from "../config.js";
+import { NOROFF_API_KEY, STORAGE_KEYS } from "../config.js";
 import { getFromLocalStorage } from "../utils/storage.js";
 
 /**
@@ -15,7 +15,7 @@ export async function http(url, opts = {}) {
 
     if (NOROFF_API_KEY) headers.set("X-Noroff-API-Key", NOROFF_API_KEY);
 
-    const token = getFromLocalStorage("accessToken");
+    const token = getFromLocalStorage(STORAGE_KEYS.token);
     if (token) headers.set("Authorization", `Bearer ${token}`);
 
     const res = await fetch(url, { ...opts, headers });

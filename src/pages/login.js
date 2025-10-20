@@ -1,5 +1,5 @@
 import { addToLocalStorage } from "../utils/storage.js";
-import { AUTH_LOGIN_URL } from "../config.js";
+import { AUTH_LOGIN_URL, STORAGE_KEYS } from "../config.js";
 import { http } from "../api/http.js";
 
 const loginForm = document.querySelector("#login-form");
@@ -10,24 +10,28 @@ async function loginUser(userDetails) {
         method: "POST",
         body: JSON.stringify(userDetails),
     });
-    return res?.data?.accessToken;
+    return res?.data?.accessToken || res?.accessToken || res?.access_token;
 }
 
-function onLoginFormSubmit(event) {
+async function onLoginFormSubmit(event) {
     event.preventDefault();
-    msg.textContent = "";
+    if (msg) msg.textContent = "";
     const formData = new FormData(event.target);
     const formFields = Object.fromEntries(formData);
 
-    loginUser(formFields)
-        .then((token) => {
+    try {
+        const token = await loginUser(formFields);
         if (!token) throw new Error("No access token returned.");
-        addToLocalStorage("accessToken", token);
-        location.href = "./index.html";
-        })
-        .catch((e) => {
-        msg.textContent = e.message || "Login failed";
-        });
+        addToLocalStorage(STORAGE_KEYS.token, token);
+        window.location.href = "./feed.html";
+    } catch (e) {
+        if (msg) msg.textContent = e.message || "Login failed";
+        console.error(e);
+    }
 }
 
-loginForm.addEventListener("submit", onLoginFormSubmit);
+if (loginForm) {
+    loginForm.addEventListener("submit", onLoginFormSubmit);
+} else {
+    console.warn("Login form not found in DOM");
+}
