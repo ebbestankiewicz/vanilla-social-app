@@ -4,7 +4,7 @@ import { http } from "./http.js";
 const POSTS_BASE = `${BASE_API_URL}/social/posts`;
 
 /**
- * Get posts (optionally filtered by query). Adjust limit as you like.
+ * Get posts (optionally filtered by query)
  */
 export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
     const sp = new URLSearchParams({ limit: String(limit), offset: String(offset) });
@@ -13,7 +13,7 @@ export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
 }
 
 /**
- * Create a post. Media is optional (array of { url, alt? }).
+ * Create a post.
  */
 export function createPost({ title, body, media = [] }) {
     return http(POSTS_BASE, {
@@ -23,8 +23,25 @@ export function createPost({ title, body, media = [] }) {
 }
 
 /**
- * Delete a post by id (we'll show the button later for your own posts).
+ * Delete a post by id.
  */
 export function deletePost(id) {
     return http(`${POSTS_BASE}/${id}`, { method: "DELETE" });
+}
+
+/**
+ * Get a single post by ID.
+ */
+export function getPost(id) {
+    return http(`${POSTS_BASE}/${id}`);
+}
+
+/**
+ * Update a post by ID.
+ */
+export function updatePost(id, data) {
+    return http(`${POSTS_BASE}/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+    });
 }
