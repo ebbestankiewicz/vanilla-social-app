@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feed</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <header>
+        <nav>
+        <a href="./index.html">Home</a>
+        <a href="./feed.html">Feed</a>
+        <a href="./register.html">Register</a>
+        <a href="./login.html">Login</a>
+        </nav>
+    </header>
+    <main class="container">
+        <h1>Feed</h1>
+        <section class="grid">
+        <div>
+            <input id="search" placeholder="Search posts..." />
+            <button id="searchBtn">Search</button>
+        </div>
+        <form id="create-form" class="grid" novalidate>
+            <input name="title" placeholder="Title" required />
+            <textarea name="body" placeholder="Say something..."></textarea>
+            <input name="mediaUrl" type="url" placeholder="Image URL (optional)" />
+            <button type="submit">Create post</button>
+        </form>
+        <p id="msg"></p>
+        </section>
+        <section id="feed"></section>
+    </main>
+    <script type="module" src="../src/pages/feed.js"></script>
+</body>
+</html>
