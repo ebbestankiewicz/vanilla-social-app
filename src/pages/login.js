@@ -5,12 +5,12 @@ import { http } from "../api/http.js";
 const loginForm = document.querySelector("#login-form");
 const msg = document.querySelector("#msg");
 
+
 async function loginUser(userDetails) {
     const res = await http(AUTH_LOGIN_URL, {
         method: "POST",
         body: JSON.stringify(userDetails),
     });
-    return res?.data?.accessToken || res?.accessToken || res?.access_token;
 }
 
 async function onLoginFormSubmit(event) {
@@ -20,9 +20,31 @@ async function onLoginFormSubmit(event) {
     const formFields = Object.fromEntries(formData);
 
     try {
-        const token = await loginUser(formFields);
-        if (!token) throw new Error("No access token returned.");
+        const res = await loginUser(formFields);
+
+        const token =
+        res?.data?.accessToken ??
+        res?.accessToken ??
+        res?.access_token ??
+        null;
+
+        const name =
+        res?.data?.name ??
+        res?.name ??
+        "";
+        const email =
+        res?.data?.email ??
+        res?.email ??
+        "";
+
+        if (!token) {
+        console.error("[login] No token in response:", res);
+        throw new Error("No access token returned.");
+        }
+
         addToLocalStorage(STORAGE_KEYS.token, token);
+        if (name) addToLocalStorage(STORAGE_KEYS.userName, name);
+
         window.location.href = "./feed.html";
     } catch (e) {
         if (msg) msg.textContent = e.message || "Login failed";
@@ -32,6 +54,7 @@ async function onLoginFormSubmit(event) {
 
 if (loginForm) {
     loginForm.addEventListener("submit", onLoginFormSubmit);
-} else {
+    } else {
     console.warn("Login form not found in DOM");
 }
+
