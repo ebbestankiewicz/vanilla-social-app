@@ -7,7 +7,7 @@ const POSTS_BASE = `${BASE_API_URL}/social/posts`;
  * Get posts (optionally filtered by query)
  */
 export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
-    const sp = new URLSearchParams({ limit: String(limit), offset: String(offset) });
+    const sp = new URLSearchParams({ limit: String(limit), offset: String(offset), _author: "true" });
     if (query) sp.set("q", query);
     return http(`${POSTS_BASE}?${sp.toString()}`);
 }
@@ -28,6 +28,7 @@ export function createPost({ title, body, media }) {
  * Delete a post by id.
  */
 export function deletePost(id) {
+    const sp = new URLSearchParams({ limit: String(limit), offset: String(offset), _author: "true" });
     return http(`${POSTS_BASE}/${id}`, { method: "DELETE" });
 }
 
