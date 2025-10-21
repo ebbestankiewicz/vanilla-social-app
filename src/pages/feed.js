@@ -56,7 +56,8 @@ function postCard(post) {
     by.textContent = `by ${post.author?.name ?? "unknown"}`;
     footer.append(by);
 
-const isMine = (post.author?.name || "").toLowerCase() === currentUserName;
+const authorName = (post.author?.name || "").toLowerCase();
+const isMine = !!authorName && !!currentUserName && authorName === currentUserName;
 
 if (isMine) {
     const spacer = document.createElement("div");
