@@ -1,6 +1,6 @@
 import { getFromLocalStorage } from "../utils/storage.js";
 import { STORAGE_KEYS } from "../config.js";
-import { listPosts, createPost } from "../api/post.js";
+import { listPosts, createPost, updatePost, deletePost } from "../api/post.js";
 
 const token = getFromLocalStorage(STORAGE_KEYS.token);
 if (!token) {
