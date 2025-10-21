@@ -54,10 +54,92 @@ function postCard(post) {
 
     const by = document.createElement("small");
     by.textContent = `by ${post.author?.name ?? "unknown"}`;
-
     footer.append(by);
-    wrapper.append(footer);
 
+const isMine = (post.author?.name || "").toLowerCase() === currentUserName;
+
+if (isMine) {
+    const spacer = document.createElement("div");
+    spacer.style.flex = "1";
+    footer.append(spacer);
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete";
+
+    footer.append(editBtn, delBtn);
+
+    const editForm = document.createElement("form");
+    editForm.style.display = "none";
+    editForm.style.marginTop = "10px";
+    editForm.style.display = "grid";
+    editForm.style.gap = "8px";
+
+    const titleInput = document.createElement("input");
+    titleInput.name = "title";
+    titleInput.value = post.title || "";
+
+    const bodyInput = document.createElement("textarea");
+    bodyInput.name = "body";
+    bodyInput.value = post.body || "";
+
+    const mediaInput = document.createElement("input");
+    mediaInput.name = "mediaUrl";
+    mediaInput.placeholder = "Image URL";
+    mediaInput.value = post.media?.[0]?.url || "";
+
+    const saveBtn = document.createElement("button");
+    saveBtn.type = "submit";
+    saveBtn.textContent = "Save";
+
+    const cancelBtn = document.createElement("button");
+    cancelBtn.type = "button";
+    cancelBtn.textContent = "Cancel";
+
+    editForm.append(titleInput, bodyInput, mediaInput, saveBtn, cancelBtn);
+    wrapper.append(editForm);
+
+    editBtn.addEventListener("click", () => {
+        editForm.style.display = editForm.style.display === "none" ? "grid" : "none";
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        editForm.style.display = "none";
+    });
+
+    editForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+            const newTitle = titleInput.value.trim() || undefined;
+            const newBody = bodyInput.value.trim() || undefined;
+            const newMediaUrl = mediaInput.value.trim();
+            const media = newMediaUrl ? { url: newMediaUrl } : undefined;
+
+            await updatePost(post.id, { title: newTitle, body: newBody, media });
+            await loadFeed(searchInput?.value?.trim() ?? "");
+            msgEl.textContent = "Post updated";
+            setTimeout(() => (msgEl.textContent = ""), 1500);
+        } catch (err) {
+            alert(err.message || "Failed to update post");
+        }
+    });
+
+    delBtn.addEventListener("click", async () => {
+        if (!confirm("Delete this post?")) return;
+        try {
+            await deletePost(post.id);
+            await loadFeed(searchInput?.value?.trim() ?? "");
+            msgEl.textContent = "Post deleted 🗑️";
+            setTimeout(() => (msgEl.textContent = ""), 1500);
+        } catch (err) {
+            alert(err.message || "Failed to delete post");
+        }
+    });
+}
+
+    wrapper.append(footer);
     return wrapper;
 }
 
