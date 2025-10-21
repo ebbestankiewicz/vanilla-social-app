@@ -28,7 +28,6 @@ export function createPost({ title, body, media }) {
  * Delete a post by id.
  */
 export function deletePost(id) {
-    const sp = new URLSearchParams({ limit: String(limit), offset: String(offset), _author: "true" });
     return http(`${POSTS_BASE}/${id}`, { method: "DELETE" });
 }
 
