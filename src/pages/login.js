@@ -5,12 +5,12 @@ import { http } from "../api/http.js";
 const loginForm = document.querySelector("#login-form");
 const msg = document.querySelector("#msg");
 
-
 async function loginUser(userDetails) {
     const res = await http(AUTH_LOGIN_URL, {
         method: "POST",
         body: JSON.stringify(userDetails),
     });
+    return res;
 }
 
 async function onLoginFormSubmit(event) {
