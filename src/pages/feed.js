@@ -203,4 +203,29 @@ if (createForm) {
     });
 }
 
+// Logout button
+const logoutBtn = document.querySelector("#logoutBtn");
+
+function isLoggedIn() {
+    const token = getFromLocalStorage(STORAGE_KEYS.token);
+    return !!token;
+}
+
+if (logoutBtn) {
+    if (!isLoggedIn()) {
+        logoutBtn.style.display = "none";
+    } else {
+        logoutBtn.style.display = "inline-block";
+        logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem(STORAGE_KEYS.token);
+        localStorage.removeItem(STORAGE_KEYS.userName);
+        localStorage.removeItem(STORAGE_KEYS.profile);
+
+        alert("You have been logged out.");
+        location.href = "./login.html";
+        });
+    }
+}
+
+
 loadFeed();
