@@ -75,8 +75,9 @@ if (isMine) {
     const editForm = document.createElement("form");
     editForm.style.display = "none";
     editForm.style.marginTop = "10px";
-    editForm.style.display = "grid";
+    editForm.style.display = "none";
     editForm.style.gap = "8px";
+    editForm.style.gridTemplateColumns = "1fr";
 
     const titleInput = document.createElement("input");
     titleInput.name = "title";
