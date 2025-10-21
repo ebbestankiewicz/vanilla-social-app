@@ -2,7 +2,7 @@ import { NOROFF_API_KEY, STORAGE_KEYS } from "../config.js";
 import { getFromLocalStorage } from "../utils/storage.js";
 
 /**
- * Tiny fetch wrapper: JSON headers + X-Noroff-API-Key + (optional) Bearer token.
+ * Tiny fetch wrapper: JSON headers + X-Noroff-API-Key + Bearer token.
  * @param {RequestInfo} url
  * @param {RequestInit} [opts]
  * @returns {Promise<any>}
