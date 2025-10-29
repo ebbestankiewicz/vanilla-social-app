@@ -3,37 +3,60 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Profile</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Profile • CODEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="dark light" />
 </head>
-<body>
-    <header>
-        <nav>
-        <a href="./index.html">Home</a>
-        <a href="./feed.html">Feed</a>
-        <a id="myProfileLink" href="#">My Profile</a>
-        <button id="logoutBtn">Logout</button>
+<body class="min-h-screen bg-gray-950 text-gray-100">
+    <header class="border-b border-gray-800 bg-gray-900/50">
+        <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+        <nav class="flex items-center gap-4">
+            <a href="./index.html" class="text-sm text-gray-300 hover:text-white">Home</a>
+            <a href="./feed.html" class="text-sm text-gray-300 hover:text-white">Feed</a>
+            <a id="myProfileLink" href="#" class="text-sm text-indigo-400 hover:underline">My Profile</a>
         </nav>
-    </header>
-    <main class="container">
-        <h1 id="profileTitle">Profile</h1>
-        <section id="profileInfo" style="margin-bottom:1rem;">
-        <img id="avatar" alt="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;" />
-        <div>
-            <p id="email"></p>
-            <p id="counts"></p>
+        <button id="logoutBtn"
+            class="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+            Logout
+        </button>
         </div>
-        <div style="margin-left:auto;">
-            <button id="followBtn" hidden>Follow</button>
-            <button id="unfollowBtn" hidden>Unfollow</button>
+    </header>
+    <main class="mx-auto max-w-3xl px-4 py-8 space-y-6">
+        <h1 id="profileTitle" class="text-3xl font-extrabold">Profile</h1>
+        <section id="profileInfo"
+                class="flex items-center gap-4 rounded-2xl border border-gray-800 bg-gray-900 p-4 shadow-lg">
+        <img id="avatar"
+            alt=""
+            class="w-20 h-20 rounded-full object-cover border border-gray-700" />
+        <div class="flex flex-col">
+            <p id="email" class="text-sm text-gray-300"></p>
+            <p id="counts" class="text-sm text-gray-400"></p>
+        </div>
+        <div class="ml-auto flex gap-2">
+            <button id="followBtn"
+                    hidden
+                    class="rounded-lg bg-indigo-600 px-4 py-1.5 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-900">
+            Follow
+            </button>
+            <button id="unfollowBtn"
+                    hidden
+                    class="rounded-lg bg-gray-700 px-4 py-1.5 text-sm font-semibold text-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+            Unfollow
+            </button>
         </div>
         </section>
-        <section>
-        <h2>Posts by <span id="who"></span></h2>
-        <div id="profilePosts">Loading…</div>
-        <p id="msg" style="margin-top:8px;"></p>
+        <section class="space-y-4">
+        <h2 class="text-xl font-bold text-gray-200">
+            Posts by <span id="who" class="text-indigo-400"></span>
+        </h2>
+        <div id="profilePosts"
+            class="space-y-4 rounded-2xl border border-gray-800 bg-gray-900 p-4">
+            Loading…
+        </div>
+        <p id="msg" class="text-sm text-indigo-300 mt-2"></p>
         </section>
     </main>
     <script type="module" src="../src/pages/profile.js"></script>
 </body>
 </html>
+
