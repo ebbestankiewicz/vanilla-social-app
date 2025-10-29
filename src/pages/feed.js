@@ -13,6 +13,8 @@ const feedEl = document.querySelector("#feed");
 const msgEl = document.querySelector("#msg");
 const searchInput = document.querySelector("#search");
 const searchBtn = document.querySelector("#searchBtn");
+const clearSearchBtn = document.querySelector("#clearSearchBtn");
+const searchStatus = document.querySelector("#searchStatus");
 const createForm = document.querySelector("#create-form");
 
 function postCard(post) {
@@ -157,11 +159,28 @@ async function loadFeed(q = "") {
     feedEl.innerHTML = "Loading…";
     try {
         const res = await listPosts({ query: q, limit: 30 });
-        const posts = res?.data ?? [];
+        let posts = res?.data ?? [];
+
+        const needle = (q || "").trim().toLowerCase();
+        if (needle) {
+        posts = posts.filter((p) => {
+            const title = (p.title || "").toLowerCase();
+            const body = (p.body || "").toLowerCase();
+            const tags = Array.isArray(p.tags) ? p.tags.map(String).join(" ").toLowerCase() : "";
+            const author = (p.author?.name || "").toLowerCase();
+            return (
+            title.includes(needle) ||
+            body.includes(needle) ||
+            tags.includes(needle) ||
+            author.includes(needle)
+            );
+        });
+        }
+
         feedEl.innerHTML = "";
         if (!posts.length) {
-            feedEl.textContent = "No posts found.";
-            return;
+        feedEl.textContent = needle ? `No posts found for “${q}”.` : "No posts found.";
+        return;
         }
         posts.forEach((p) => feedEl.append(postCard(p)));
     } catch (e) {
@@ -170,20 +189,69 @@ async function loadFeed(q = "") {
     }
 }
 
-if (searchBtn) {
-    searchBtn.addEventListener("click", () => {
-        loadFeed(searchInput?.value?.trim() ?? "");
-    });
-}
 
-if (searchInput) {
-    searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            loadFeed(searchInput.value.trim());
+function debounce(fn, ms = 300) {
+    let t;
+    return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), ms);
+    };
+    }
+
+    let inFlight = null;
+
+    async function performSearch(q) {
+    if (inFlight) inFlight.abort?.();
+
+    inFlight = new AbortController();
+    const signal = inFlight.signal;
+
+    try {
+        if (searchStatus) searchStatus.textContent = q ? `Searching “${q}”…` : "";
+        await loadFeed(q);
+        if (signal.aborted) return;
+        if (searchStatus) {
+        const trimmed = (q || "").trim();
+        searchStatus.textContent = trimmed ? `Results for “${trimmed}”` : "";
         }
-    });
+    } catch (e) {
+        if (signal.aborted) return;
+        if (searchStatus) searchStatus.textContent = e?.message || "Search failed";
+    }
 }
+const debouncedSearch = debounce((q) => performSearch(q), 350);
+
+// Search button
+searchBtn?.addEventListener("click", () => {
+    const q = searchInput?.value?.trim() ?? "";
+    performSearch(q);
+});
+
+// Live search input
+searchInput?.addEventListener("input", () => {
+    const q = searchInput.value.trim();
+    debouncedSearch(q);
+});
+
+// Enter key to search
+searchInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        performSearch(searchInput.value.trim());
+    }
+    // Escape key to clear
+    if (e.key === "Escape") {
+        searchInput.value = "";
+        performSearch("");
+    }
+});
+
+// Clear search button
+clearSearchBtn?.addEventListener("click", () => {
+    searchInput.value = "";
+    performSearch("");
+});
+
 
 if (createForm) {
     createForm.addEventListener("submit", async (e) => {

@@ -19,11 +19,14 @@
     </header>
     <main class="container">
         <h1>Feed</h1>
+
+        <section class="searchbar">
+            <input id="search" type="search" placeholder="Search posts..." />
+            <button id="searchBtn" type="button">Search</button>
+            <button id="clearSearchBtn" type="button" aria-label="Clear search">✕</button>
+            <small id="searchStatus"></small>
+        </section>
         <section class="grid">
-        <div>
-            <input id="search" placeholder="Search posts..." />
-            <button id="searchBtn">Search</button>
-        </div>
         <form id="create-form" class="grid" novalidate>
             <input name="title" placeholder="Title" required />
             <textarea name="body" placeholder="Say something..."></textarea>
