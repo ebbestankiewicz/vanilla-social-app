@@ -29,3 +29,35 @@ if (!name) {
 }
 whoEl.textContent = name;
 profileTitle.textContent = `Profile: ${name}`;
+
+function postCard(post) {
+    const card = document.createElement("article");
+    card.style.padding = "1rem";
+    card.style.border = "1px solid #263041";
+    card.style.borderRadius = "12px";
+    card.style.marginBottom = "12px";
+    card.style.background = "#131720";
+
+    const h3 = document.createElement("h3");
+    h3.textContent = post.title || "(untitled)";
+    h3.style.cursor = "pointer";
+    h3.addEventListener("click", () => (location.href = `./post.html?id=${post.id}`));
+
+    const p = document.createElement("p");
+    p.textContent = post.body || "";
+
+    card.append(h3, p);
+
+    const mediaUrl = post.media?.url;
+    if (mediaUrl) {
+        const img = document.createElement("img");
+        img.src = mediaUrl;
+        img.alt = post.media?.alt || "";
+        img.style.width = "100%";
+        img.style.borderRadius = "10px";
+        img.style.marginTop = "8px";
+        card.append(img);
+    }
+
+    return card;
+}
