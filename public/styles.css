@@ -41,4 +41,37 @@ a { color: #7cc0ff; }
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+}
+
+label{
+    margin-top: 10px;
+    margin-bottom: 2px;
+    text-align: left;
+}
+
+input{
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #1a1c20;
+    color: #e9eef5;
+}
+
+button{
+    padding: 0.6rem 1rem;
+    background-color: #4aa6ff;
+    color: #071124;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    margin-top: 15px;
+}
+
+small{
+    margin-top: 10px;
 }
