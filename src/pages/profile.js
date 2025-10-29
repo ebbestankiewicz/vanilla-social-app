@@ -18,3 +18,14 @@ const unfollowBtn = document.getElementById("unfollowBtn");
 const postsWrap = document.getElementById("profilePosts");
 const whoEl = document.getElementById("who");
 const msgEl = document.getElementById("msg");
+
+
+// --- Get profile name from URL or storage
+const params = new URLSearchParams(location.search);
+const name = (params.get("name") || getFromLocalStorage(STORAGE_KEYS.userName) || "").trim();
+if (!name) {
+    postsWrap.textContent = "No profile name provided.";
+    throw new Error("Missing profile name");
+}
+whoEl.textContent = name;
+profileTitle.textContent = `Profile: ${name}`;
