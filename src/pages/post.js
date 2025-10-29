@@ -54,7 +54,10 @@ function renderPost(post) {
     }
 
     const by = document.createElement("small");
-    by.textContent = `by ${post.author?.name ?? "unknown"}`;
+    const author = post.author?.name;
+    by.innerHTML = author
+    ? `by <a href="./profile.html?name=${encodeURIComponent(author)}">${author}</a>`
+    : "by unknown";
     wrapper.append(by);
 
     if (postEl) {
