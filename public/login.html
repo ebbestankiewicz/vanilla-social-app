@@ -3,29 +3,68 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Login</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Login • CODEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="dark light" />
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="./register.html">Register</a>
-            <a href="./login.html">Login</a>
+<body class="min-h-screen bg-gray-950 text-gray-100">
+    <header class="border-b border-gray-800 bg-gray-900/50">
+        <div class="mx-auto max-w-4xl px-4 py-4 flex items-center justify-between">
+        <a href="./index.html" class="inline-flex items-center gap-2 text-indigo-400 font-bold tracking-wide">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-indigo-600 text-white">C</span>
+            <span class="text-lg">CODEL</span>
+        </a>
+        <nav class="flex items-center gap-4 text-sm">
+            <a href="./register.html" class="text-gray-300 hover:text-white">Register</a>
+            <a href="./login.html" class="text-gray-300 hover:text-white">Login</a>
         </nav>
+        </div>
     </header>
-    <main class="container">
-        <h1>Login account</h1>
-        <form id="login-form" class="grid" novalidate>
-            <label for="email">Email</label>
-            <input name="email" type="email" placeholder="Email (@stud.noroff.no)" required value="Handball123@stud.noroff.no"/>
-            <label for="password">Password</label>
-            <input name="password" type="password" placeholder="Password (min 8 chars)" minlength="8" required value="Testing123"/>
-            <button type="submit">Login</button>
-            <small>Need an account? <a href="./register.html">Register</a></small>
+    <main class="mx-auto max-w-md px-4 py-12">
+        <h1 class="text-3xl font-extrabold text-center">Login to your account</h1>
+        <p class="text-center text-gray-400 mt-2">Welcome back to <span class="text-indigo-400 font-semibold">CODEL</span></p>
+        <form id="login-form" class="mt-8 grid gap-4 rounded-2xl border border-gray-800 bg-gray-900 p-6 shadow-xl" novalidate>
+        <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="email">Email</label>
+            <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email (@stud.noroff.no)"
+            required
+            value="Handball123@stud.noroff.no"
+            class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+        </div>
+        <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="password">Password</label>
+            <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password (min 8 chars)"
+            minlength="8"
+            required
+            value="Testing123"
+            class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+        </div>
+        <div class="mt-2 flex flex-col gap-3">
+            <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-900 transition">
+            Login
+            </button>
+            <small class="text-gray-400 text-center">
+            Need an account?
+            <a href="./register.html" class="text-indigo-400 hover:underline">Register</a>
+            </small>
+        </div>
         </form>
-        <p id="msg"></p>
-        <p><a href="./index.html" class="small">← Back to home</a></p>
+        <p id="msg" class="mt-4 text-center text-sm text-indigo-300"></p>
+        <p class="mt-6 text-center">
+        <a href="./index.html" class="text-sm text-gray-400 hover:text-gray-200">← Back to home</a>
+        </p>
     </main>
     <script type="module" src="../src/pages/login.js"></script>
 </body>

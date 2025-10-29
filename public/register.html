@@ -8,7 +8,6 @@
     <meta name="color-scheme" content="dark light" />
 </head>
 <body class="min-h-screen bg-gray-950 text-gray-100">
-    <!-- Header -->
     <header class="border-b border-gray-800 bg-gray-900/50">
         <div class="mx-auto max-w-4xl px-4 py-4 flex items-center justify-between">
         <a href="./index.html" class="inline-flex items-center gap-2 text-indigo-400 font-bold tracking-wide">
@@ -21,14 +20,10 @@
         </nav>
         </div>
     </header>
-
-    <!-- Main -->
     <main class="mx-auto max-w-4xl px-4 py-10">
         <h1 class="text-3xl font-extrabold">Create account</h1>
         <p class="text-gray-300 mt-2">Use your <span class="font-semibold text-indigo-300">@stud.noroff.no</span> email.</p>
-
         <form id="register-form" class="mt-8 grid gap-4 rounded-2xl border border-gray-800 bg-gray-900 p-6" novalidate>
-        <!-- Username -->
         <div class="grid gap-1">
             <label class="text-sm text-gray-300" for="name">Username</label>
             <input
@@ -41,8 +36,6 @@
             />
             <p class="text-xs text-gray-500">Letters, numbers, and underscore (_).</p>
         </div>
-
-        <!-- Email -->
         <div class="grid gap-1">
             <label class="text-sm text-gray-300" for="email">Email</label>
             <input
@@ -55,8 +48,6 @@
             class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
             />
         </div>
-
-        <!-- Password -->
         <div class="grid gap-1">
             <label class="text-sm text-gray-300" for="password">Password</label>
             <input
@@ -70,8 +61,6 @@
             class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
             />
         </div>
-
-        <!-- Bio -->
         <div class="grid gap-1">
             <label class="text-sm text-gray-300" for="bio">Bio (optional)</label>
             <textarea
@@ -83,8 +72,6 @@
             ></textarea>
             <p class="text-xs text-gray-500">Max 160 characters.</p>
         </div>
-
-        <!-- Avatar -->
         <div class="grid md:grid-cols-2 gap-4">
             <div class="grid gap-1">
             <label class="text-sm text-gray-300" for="avatarUrl">Avatar URL</label>
@@ -107,8 +94,6 @@
             />
             </div>
         </div>
-
-        <!-- Banner -->
         <div class="grid md:grid-cols-2 gap-4">
             <div class="grid gap-1">
             <label class="text-sm text-gray-300" for="bannerUrl">Banner URL</label>
@@ -131,8 +116,6 @@
             />
             </div>
         </div>
-
-        <!-- Actions -->
         <div class="mt-2 flex flex-wrap items-center gap-3">
             <button
             type="submit"
@@ -145,13 +128,11 @@
             </small>
         </div>
         </form>
-
         <p id="msg" class="mt-4 text-sm text-indigo-300"></p>
         <p class="mt-2">
         <a href="./index.html" class="text-sm text-gray-400 hover:text-gray-200">← Back to home</a>
         </p>
     </main>
-
 <script type="module" src="../src/pages/register.js"></script>
 </body>
 </html>
