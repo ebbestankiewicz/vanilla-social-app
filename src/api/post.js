@@ -35,7 +35,8 @@ export function deletePost(id) {
  * Get a single post by ID.
  */
 export function getPost(id) {
-    return http(`${POSTS_BASE}/${id}`);
+    const sp = new URLSearchParams({ _author: "true" });
+    return http(`${POSTS_BASE}/${id}?${sp.toString()}`);
 }
 
 /**
