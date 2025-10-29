@@ -3,35 +3,157 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Register</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>Register • CODEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="dark light" />
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="./register.html">Register</a>
-            <a href="./login.html">Login</a>
+<body class="min-h-screen bg-gray-950 text-gray-100">
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-gray-900/50">
+        <div class="mx-auto max-w-4xl px-4 py-4 flex items-center justify-between">
+        <a href="./index.html" class="inline-flex items-center gap-2 text-indigo-400 font-bold tracking-wide">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-indigo-600 text-white">C</span>
+            <span class="text-lg">CODEL</span>
+        </a>
+        <nav class="flex items-center gap-4 text-sm">
+            <a href="./register.html" class="text-gray-300 hover:text-white">Register</a>
+            <a href="./login.html" class="text-gray-300 hover:text-white">Login</a>
         </nav>
+        </div>
     </header>
-    <main class="container">
-        <h1>Create account</h1>
-        <form id="register-form" class="grid" novalidate>
-            <input name="name" placeholder="Username" required value="Handball123"/>
-            <input name="email" type="email" placeholder="Email (@stud.noroff.no)" required value="Handball123@stud.noroff.no"/>
-            <input name="password" type="password" placeholder="Password (min 8 chars)" minlength="8" required value="Testing123"/>
-            <textarea name="bio" maxlength="160" placeholder="Bio (optional, max 160)"></textarea>
-            <input name="avatarUrl" type="url" placeholder="Avatar URL (optional)" />
-            <input name="avatarAlt" maxlength="120" placeholder="Avatar alt (optional, needs URL)" />
-            <input name="bannerUrl" type="url" placeholder="Banner URL (optional)" />
-            <input name="bannerAlt" maxlength="120" placeholder="Banner alt (optional, needs URL)" />
-            <button type="submit">Register</button>
-            <small>Already registered? <a href="./login.html">Go to login</a></small>
+
+    <!-- Main -->
+    <main class="mx-auto max-w-4xl px-4 py-10">
+        <h1 class="text-3xl font-extrabold">Create account</h1>
+        <p class="text-gray-300 mt-2">Use your <span class="font-semibold text-indigo-300">@stud.noroff.no</span> email.</p>
+
+        <form id="register-form" class="mt-8 grid gap-4 rounded-2xl border border-gray-800 bg-gray-900 p-6" novalidate>
+        <!-- Username -->
+        <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="name">Username</label>
+            <input
+            id="name"
+            name="name"
+            placeholder="Username"
+            required
+            value="Handball123"
+            class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <p class="text-xs text-gray-500">Letters, numbers, and underscore (_).</p>
+        </div>
+
+        <!-- Email -->
+        <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="email">Email</label>
+            <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email (@stud.noroff.no)"
+            required
+            value="Handball123@stud.noroff.no"
+            class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+        </div>
+
+        <!-- Password -->
+        <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="password">Password</label>
+            <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password (min 8 chars)"
+            minlength="8"
+            required
+            value="Testing123"
+            class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+        </div>
+
+        <!-- Bio -->
+        <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="bio">Bio (optional)</label>
+            <textarea
+            id="bio"
+            name="bio"
+            maxlength="160"
+            placeholder="Bio (optional, max 160)"
+            class="min-h-[90px] w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            ></textarea>
+            <p class="text-xs text-gray-500">Max 160 characters.</p>
+        </div>
+
+        <!-- Avatar -->
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="avatarUrl">Avatar URL</label>
+            <input
+                id="avatarUrl"
+                name="avatarUrl"
+                type="url"
+                placeholder="Avatar URL (optional)"
+                class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            </div>
+            <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="avatarAlt">Avatar alt</label>
+            <input
+                id="avatarAlt"
+                name="avatarAlt"
+                maxlength="120"
+                placeholder="Avatar alt (optional, needs URL)"
+                class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            </div>
+        </div>
+
+        <!-- Banner -->
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="bannerUrl">Banner URL</label>
+            <input
+                id="bannerUrl"
+                name="bannerUrl"
+                type="url"
+                placeholder="Banner URL (optional)"
+                class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            </div>
+            <div class="grid gap-1">
+            <label class="text-sm text-gray-300" for="bannerAlt">Banner alt</label>
+            <input
+                id="bannerAlt"
+                name="bannerAlt"
+                maxlength="120"
+                placeholder="Banner alt (optional, needs URL)"
+                class="w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-2 flex flex-wrap items-center gap-3">
+            <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-900 transition">
+            Register
+            </button>
+            <small class="text-gray-400">
+            Already registered?
+            <a href="./login.html" class="text-indigo-400 hover:underline">Go to login</a>
+            </small>
+        </div>
         </form>
-        <p id="msg"></p>
-        <p><a href="./index.html" class="small">← Back to home</a></p>
+
+        <p id="msg" class="mt-4 text-sm text-indigo-300"></p>
+        <p class="mt-2">
+        <a href="./index.html" class="text-sm text-gray-400 hover:text-gray-200">← Back to home</a>
+        </p>
     </main>
-    <script type="module" src="../src/pages/register.js"></script>
+
+<script type="module" src="../src/pages/register.js"></script>
 </body>
 </html>
+
 
