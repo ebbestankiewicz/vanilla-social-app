@@ -53,8 +53,14 @@ function postCard(post) {
     footer.style.marginTop = "8px";
 
     const by = document.createElement("small");
-    by.textContent = `by ${post.author?.name ?? "unknown"}`;
-    footer.append(by);
+    const author = post.author?.name;
+
+    if (author) {
+        by.innerHTML = `by <a href="./profile.html?name=${encodeURIComponent(author)}">${author}</a>`;
+    } else {
+        by.textContent = "by unknown";
+    }
+footer.append(by);
 
 const authorName = (post.author?.name || "").toLowerCase();
 const isMine = !!authorName && !!currentUserName && authorName === currentUserName;
