@@ -35,11 +35,11 @@ function postCard(post) {
 
     wrapper.append(title, body);
 
-    const mediaUrl = post.media?.[0]?.url;
+    const mediaUrl = post.media?.url;
     if (mediaUrl) {
         const img = document.createElement("img");
         img.src = mediaUrl;
-        img.alt = post.media?.[0]?.alt || "";
+        img.alt = post.media?.alt || "";
         img.style.width = "100%";
         img.style.borderRadius = "10px";
         img.style.marginTop = "8px";

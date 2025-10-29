@@ -44,10 +44,10 @@ function renderPost(post) {
 
     wrapper.append(title, body);
 
-    if (post.media?.[0]?.url) {
+    if (post.media?.url) {
         const img = document.createElement("img");
-        img.src = post.media[0].url;
-        img.alt = post.media[0].alt || "";
+        img.src = post.media.url;
+        img.alt = post.media.alt || "";
         img.style.width = "100%";
         img.style.marginTop = "1rem";
         wrapper.append(img);
