@@ -76,22 +76,3 @@ button{
 small{
     margin-top: 10px;
 }
-
-/* Landing page */
-.page-header {
-    width: 100%;
-    background: #FA7E0A;
-    padding: 2rem 2rem;
-    margin-bottom: 2rem;
-    color: white;
-}
-
-.page-footer {
-    width: 100%;
-    background: #FA7E0A;
-    color: #666;
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-}
