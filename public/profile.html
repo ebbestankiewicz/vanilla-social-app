@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <header>
+        <nav>
+        <a href="./index.html">Home</a>
+        <a href="./feed.html">Feed</a>
+        <button id="logoutBtn">Logout</button>
+        </nav>
+    </header>
+    <main class="container">
+        <h1 id="profileTitle">Profile</h1>
+        <section id="profileInfo" style="margin-bottom:1rem;">
+        <img id="avatar" alt="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;" />
+        <div>
+            <p id="email"></p>
+            <p id="counts"></p>
+        </div>
+        <div style="margin-left:auto;">
+            <button id="followBtn" hidden>Follow</button>
+            <button id="unfollowBtn" hidden>Unfollow</button>
+        </div>
+        </section>
+        <section>
+        <h2>Posts by <span id="who"></span></h2>
+        <div id="profilePosts">Loading…</div>
+        <p id="msg" style="margin-top:8px;"></p>
+        </section>
+    </main>
+    <script type="module" src="../src/pages/profile.js"></script>
+</body>
+</html>
