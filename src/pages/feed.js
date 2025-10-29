@@ -233,5 +233,15 @@ if (logoutBtn) {
     }
 }
 
-
 loadFeed();
+
+
+const myProfileLink = document.getElementById("myProfileLink");
+if (myProfileLink) {
+    const userName = getFromLocalStorage(STORAGE_KEYS.userName);
+    if (userName) {
+        myProfileLink.href = `./profile.html?name=${encodeURIComponent(userName)}`;
+    } else {
+        myProfileLink.href = "./login.html";
+    }
+}
