@@ -2,7 +2,6 @@ import { getFromLocalStorage } from "../utils/storage.js";
 import { STORAGE_KEYS } from "../config.js";
 import { getProfile, getProfilePosts, followProfile, unfollowProfile } from "../api/profiles.js";
 
-// --- Auth guard
 const token = getFromLocalStorage(STORAGE_KEYS.token);
 if (!token) location.href = "./login.html";
 
@@ -61,3 +60,84 @@ function postCard(post) {
 
     return card;
 }
+
+// --- Load profile data
+async function loadProfile() {
+    try {
+        msgEl.textContent = "";
+        const profRes = await getProfile(name, { posts: false, followers: true, following: true });
+        const prof = profRes?.data ?? profRes;
+
+        avatarImg.src = prof?.avatar?.url || "https://placehold.co/80x80?text=?";
+        avatarImg.alt = prof?.avatar?.alt || `${name}'s avatar`;
+        emailEl.textContent = prof?.email || "";
+        const c = prof?._count || {};
+        countsEl.textContent = `Posts: ${c.posts ?? 0} • Followers: ${c.followers ?? 0} • Following: ${c.following ?? 0}`;
+
+        const myName = (getFromLocalStorage(STORAGE_KEYS.userName) || "").toLowerCase();
+        const viewed = (name || "").toLowerCase();
+        const isMine = myName && viewed && myName === viewed;
+
+        followBtn.hidden = true;
+        unfollowBtn.hidden = true;
+
+        if (!isMine) {
+        const amIFollowing = Array.isArray(prof?.followers)
+            ? prof.followers.some((f) => (f?.name || "").toLowerCase() === myName)
+            : false;
+
+        if (amIFollowing) {
+            unfollowBtn.hidden = false;
+        } else {
+            followBtn.hidden = false;
+        }
+        }
+    } catch (err) {
+        msgEl.textContent = err?.message || "Failed to load profile.";
+    }
+    }
+
+// --- Load profile posts
+    async function loadPosts() {
+    try {
+        postsWrap.textContent = "Loading…";
+        const postsRes = await getProfilePosts(name, { limit: 30, offset: 0 });
+        const posts = postsRes?.data ?? [];
+        postsWrap.innerHTML = "";
+        if (!posts.length) {
+        postsWrap.textContent = "No posts by this user.";
+        return;
+        }
+        posts.forEach((p) => postsWrap.append(postCard(p)));
+    } catch (err) {
+        postsWrap.textContent = err?.message || "Failed to load posts.";
+    }
+    }
+
+// --- Follow / Unfollow handlers
+    followBtn?.addEventListener("click", async () => {
+    try {
+        followBtn.disabled = true;
+        await followProfile(name);
+        await loadProfile();
+    } catch (e) {
+        alert(e?.message || "Failed to follow.");
+    } finally {
+        followBtn.disabled = false;
+    }
+    });
+
+    unfollowBtn?.addEventListener("click", async () => {
+    try {
+        unfollowBtn.disabled = true;
+        await unfollowProfile(name);
+        await loadProfile();
+    } catch (e) {
+        alert(e?.message || "Failed to unfollow.");
+    } finally {
+        unfollowBtn.disabled = false;
+    }
+    });
+
+    await loadProfile();
+    await loadPosts();
