@@ -4,7 +4,7 @@ import { http } from "./http.js";
 const POSTS_BASE = `${BASE_API_URL}/social/posts`;
 
 /**
- * Get posts (optionally filtered by query)
+ * Get posts.
  */
 export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
     const sp = new URLSearchParams({ limit: String(limit), offset: String(offset), _author: "true" });
@@ -17,7 +17,7 @@ export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
  */
 export function createPost({ title, body, media }) {
     const payload = { title, body };
-    if (media) payload.media = media;
+    if (media !== undefined) payload.media = media;
     return http(`${BASE_API_URL}/social/posts`, {
         method: "POST",
         body: JSON.stringify(payload),
@@ -44,7 +44,7 @@ export function getPost(id) {
  */
 export function updatePost(id, { title, body, media }) {
     const payload = { title, body };
-    if (media !== undefined) payload.media = media; // set to {url,...} or null to clear
+    if (media !== undefined) payload.media = media;
     return http(`${BASE_API_URL}/social/posts/${id}`, {
         method: "PUT",
         body: JSON.stringify(payload),

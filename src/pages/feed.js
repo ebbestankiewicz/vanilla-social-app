@@ -96,7 +96,7 @@ if (isMine) {
     const mediaInput = document.createElement("input");
     mediaInput.name = "mediaUrl";
     mediaInput.placeholder = "Image URL";
-    mediaInput.value = post.media?.[0]?.url || "";
+    mediaInput.value = post.media?.url || "";
 
     const saveBtn = document.createElement("button");
     saveBtn.type = "submit";
@@ -195,7 +195,7 @@ if (createForm) {
             const title = String(fd.get("title") || "").trim();
             const body = String(fd.get("body") || "").trim() || undefined;
             const mediaUrl = String(fd.get("mediaUrl") || "").trim();
-            const media = mediaUrl ? [{ url: mediaUrl }] : undefined;
+            const media = mediaUrl ? { url: mediaUrl } : undefined;
 
             if (!title) throw new Error("Title is required.");
 
