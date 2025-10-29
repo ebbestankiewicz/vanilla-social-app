@@ -1,9 +1,8 @@
 body {
     font-family: system-ui, sans-serif;
-    background: #0b0d10;
-    color: #e9eef5;
+    background: white;
+    color: #FA7E0A;
     margin: 0;
-    padding: 2rem;
 }
 a { color: #7cc0ff; }
 
@@ -15,6 +14,8 @@ a { color: #7cc0ff; }
     text-align: center;
     gap: 1.5rem;
     padding: 0% 1rem;
+    min-height: 100vh;
+    text-align: left;
 }
 
 .container a.button {
@@ -74,4 +75,23 @@ button{
 
 small{
     margin-top: 10px;
+}
+
+/* Landing page */
+.page-header {
+    width: 100%;
+    background: #FA7E0A;
+    padding: 2rem 2rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.page-footer {
+    width: 100%;
+    background: #FA7E0A;
+    color: #666;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
 }

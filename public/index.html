@@ -4,13 +4,85 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Vanilla Social</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <main class="container">
-        <h1>Welcome to Vanilla Social</h1>
-        <p><a href="./login.html" class="button">Login</a></p>
-        <p><a href="./register.html" class="button">Register</a></p>
+<body class="min-h-screen bg-gray-950 text-gray-100 selection:bg-indigo-600/30 selection:text-white">
+    <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur supports-[backdrop-filter]:bg-gray-900/30">
+        <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+        <a href="./index.html" class="inline-flex items-center gap-2 text-indigo-400 font-bold tracking-wide">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-indigo-600 text-white">C</span>
+            <span class="text-lg">CODEL</span>
+        </a>
+        <nav class="flex items-center gap-3">
+            <a href="./login.html" class="text-sm text-gray-300 hover:text-white transition-colors">Login</a>
+            <a href="./register.html" class="text-sm text-gray-300 hover:text-white transition-colors">Register</a>
+        </nav>
+        </div>
+    </header>
+    <main class="mx-auto max-w-6xl px-4">
+        <section class="py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            CODEL: <span class="text-indigo-400">Where local devs connect</span>
+            </h1>
+            <p class="mt-4 text-gray-300 text-lg">
+            Meet, share, and vibe with coders around you — <span class="text-indigo-300 font-semibold">#BuildTogether</span>
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+            <a href="./login.html"
+                class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-gray-950 transition">
+                Login
+            </a>
+            <a href="./register.html"
+                class="inline-flex items-center justify-center rounded-lg border border-gray-700 px-5 py-2.5 font-semibold text-gray-100 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-950 transition">
+                Register
+            </a>
+            </div>
+
+            <!-- Small trust/teaser row -->
+            <div class="mt-8 flex items-center gap-4 text-sm text-gray-400">
+            <div class="inline-flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span> Live community
+            </div>
+            <div class="inline-flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-indigo-500"></span> Post, comment, react
+            </div>
+            <div class="inline-flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-pink-500"></span> Follow creators
+            </div>
+            </div>
+        </div>
+
+        <!-- Pretty gradient block (no image needed) -->
+        <div class="relative isolate">
+            <div
+            class="absolute -inset-6 md:-inset-10 -z-10 rounded-3xl bg-gradient-to-tr from-indigo-600/20 via-fuchsia-600/20 to-cyan-500/20 blur-2xl">
+            </div>
+            <div class="rounded-3xl border border-gray-800 bg-gray-900/60 p-8 shadow-xl">
+            <div class="grid gap-4">
+                <div class="rounded-xl border border-gray-800 bg-gray-900 p-4">
+                <p class="text-sm text-gray-400">Latest vibe</p>
+                <p class="mt-2 text-gray-200">“Just shipped my first post with media 🎉”</p>
+                </div>
+                <div class="rounded-xl border border-gray-800 bg-gray-900 p-4">
+                <p class="text-sm text-gray-400">Pro tip</p>
+                <p class="mt-2 text-gray-200">Use the search bar to find posts by title, body, tags, or author.</p>
+                </div>
+                <div class="rounded-xl border border-gray-800 bg-gray-900 p-4">
+                <p class="text-sm text-gray-400">Next step</p>
+                <p class="mt-2 text-gray-200">Create your account and start following devs you like.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
     </main>
+    <footer class="mt-auto border-t border-gray-800 bg-gray-900/50">
+        <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-gray-400 flex items-center justify-between">
+            <p>© <span id="year"></span> CODEL</p>
+            <p>Built with Vanilla JS + Tailwind</p>
+        </div>
+    </footer>
 </body>
 </html>
