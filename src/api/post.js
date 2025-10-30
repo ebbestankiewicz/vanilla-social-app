@@ -1,7 +1,6 @@
 import { BASE_API_URL } from "../config.js";
 import { http } from "./http.js";
-
-const POSTS_BASE = `${BASE_API_URL}/social/posts`;
+import { POSTS_URL } from "../config.js"
 
 /**
  * Get posts.
@@ -9,7 +8,7 @@ const POSTS_BASE = `${BASE_API_URL}/social/posts`;
 export function listPosts({ query = "", limit = 30, offset = 0 } = {}) {
     const sp = new URLSearchParams({ limit: String(limit), offset: String(offset), _author: "true" });
     if (query) sp.set("q", query);
-    return http(`${POSTS_BASE}?${sp.toString()}`);
+    return http(`${POSTS_URL}?${sp.toString()}`);
 }
 
 /**
@@ -28,7 +27,7 @@ export function createPost({ title, body, media }) {
  * Delete a post by id.
  */
 export function deletePost(id) {
-    return http(`${POSTS_BASE}/${id}`, { method: "DELETE" });
+    return http(`${POSTS_URL}/${id}`, { method: "DELETE" });
 }
 
 /**
@@ -36,7 +35,7 @@ export function deletePost(id) {
  */
 export function getPost(id) {
     const sp = new URLSearchParams({ _author: "true" });
-    return http(`${POSTS_BASE}/${id}?${sp.toString()}`);
+    return http(`${POSTS_URL}/${id}?${sp.toString()}`);
 }
 
 /**

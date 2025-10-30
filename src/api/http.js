@@ -23,7 +23,7 @@ export async function http(url, opts = {}) {
     const body = isJSON ? await res.json() : await res.text();
 
     if (!res.ok) {
-        const message = body?.errors?.[0]?.message || body?.message || res.statusText;
+        const message = body?.errors?.message || body?.message || res.statusText;
         throw new Error(message);
     }
     return body;
