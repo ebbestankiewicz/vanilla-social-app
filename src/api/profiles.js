@@ -1,7 +1,5 @@
-import { BASE_API_URL } from "../config.js";
+import { PROFILES_BASE } from "../config.js";
 import { http } from "./http.js";
-
-const PROFILES_BASE = `${BASE_API_URL}/social/profiles`;
 
 /** Get profile by name */
 export function getProfile(name, { posts = false, followers = false, following = false } = {}) {
