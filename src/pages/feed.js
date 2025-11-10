@@ -7,7 +7,7 @@ if (!token) {
     location.href = "./login.html";
 }
 
-const currentUserName = (getFromLocalStorage("currentUserName") || "").toLowerCase();
+const currentUserName = (getFromLocalStorage(STORAGE_KEYS.userName) || "").toLowerCase();
 
 const feedEl = document.querySelector("#feed");
 const msgEl = document.querySelector("#msg");
