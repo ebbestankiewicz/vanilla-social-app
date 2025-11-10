@@ -41,19 +41,16 @@ profileTitle.textContent = `Profile: ${name}`;
  */
 function postCard(post) {
     const card = document.createElement("article");
-    card.style.padding = "1rem";
-    card.style.border = "1px solid #263041";
-    card.style.borderRadius = "12px";
-    card.style.marginBottom = "12px";
-    card.style.background = "#131720";
+    card.className = "bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-sm hover:border-indigo-600 transition";
 
     const h3 = document.createElement("h3");
     h3.textContent = post.title || "(untitled)";
-    h3.style.cursor = "pointer";
+    h3.className = "text-lg font-semibold text-indigo-400 cursor-pointer hover:underline";
     h3.addEventListener("click", () => (location.href = `./post.html?id=${post.id}`));
 
     const p = document.createElement("p");
     p.textContent = post.body || "";
+    p.className = "text-gray-300 mt-2";
 
     card.append(h3, p);
 
@@ -62,9 +59,7 @@ function postCard(post) {
         const img = document.createElement("img");
         img.src = mediaUrl;
         img.alt = post.media?.alt || "";
-        img.style.width = "100%";
-        img.style.borderRadius = "10px";
-        img.style.marginTop = "8px";
+        img.className = "w-full rounded-lg mt-3";
         card.append(img);
     }
 
