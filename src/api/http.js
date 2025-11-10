@@ -2,10 +2,11 @@ import { NOROFF_API_KEY, STORAGE_KEYS } from "../config.js";
 import { getFromLocalStorage } from "../utils/storage.js";
 
 /**
- * Tiny fetch wrapper: JSON headers + X-Noroff-API-Key + Bearer token.
- * @param {RequestInfo} url
- * @param {RequestInit} [opts]
- * @returns {Promise<any>}
+ * Simple HTTP wrapper for the Noroff API.
+ * Automatically handles JSON and headers.
+ * @param {string} url - Request URL.
+ * @param {RequestInit} options - Fetch options.
+ * @returns {Promise<Object>} Parsed JSON response.
  */
 export async function http(url, opts = {}) {
     const headers = new Headers({
