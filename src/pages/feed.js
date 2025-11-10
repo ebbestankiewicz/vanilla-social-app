@@ -65,9 +65,11 @@ if (isMine) {
 
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
+    editBtn.className = "px-3 py-1.5 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-100";
 
     const delBtn = document.createElement("button");
     delBtn.textContent = "Delete";
+    delBtn.className = "px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white";
 
     footer.append(editBtn, delBtn);
 
@@ -77,23 +79,30 @@ if (isMine) {
     const titleInput = document.createElement("input");
     titleInput.name = "title";
     titleInput.value = post.title || "";
+    titleInput.placeholder = "Title";
+    titleInput.className = "rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
 
     const bodyInput = document.createElement("textarea");
     bodyInput.name = "body";
     bodyInput.value = post.body || "";
+    bodyInput.placeholder = "Say something…";
+    bodyInput.className = "min-h-[90px] rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
 
     const mediaInput = document.createElement("input");
     mediaInput.name = "mediaUrl";
     mediaInput.placeholder = "Image URL";
     mediaInput.value = post.media?.url || "";
+    mediaInput.className = "rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
 
     const saveBtn = document.createElement("button");
     saveBtn.type = "submit";
     saveBtn.textContent = "Save";
+    saveBtn.className = "px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold";
 
     const cancelBtn = document.createElement("button");
     cancelBtn.type = "button";
     cancelBtn.textContent = "Cancel";
+    cancelBtn.className = "px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-100";
 
     editForm.append(titleInput, bodyInput, mediaInput, saveBtn, cancelBtn);
     wrapper.append(editForm);
