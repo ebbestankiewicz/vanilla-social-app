@@ -60,7 +60,7 @@ const isMine = !!authorName && !!currentUserName && authorName === currentUserNa
 
 if (isMine) {
     const spacer = document.createElement("div");
-    spacer.style.flex = "1";
+    spacer.className = "flex-1";
     footer.append(spacer);
 
     const editBtn = document.createElement("button");
