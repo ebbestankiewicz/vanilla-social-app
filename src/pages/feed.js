@@ -133,6 +133,7 @@ if (isMine) {
     });
 
     delBtn.addEventListener("click", async () => {
+        if (!confirm("Delete this post? This cannot be undone.")) return;
         try {
             await deletePost(post.id);
             await loadFeed(searchInput?.value?.trim() ?? "");
@@ -286,6 +287,7 @@ if (logoutBtn) {
     } else {
         logoutBtn.style.display = "inline-block";
         logoutBtn.addEventListener("click", () => {
+            if (!confirm("Are you sure you want to log out?")) return;
         localStorage.removeItem(STORAGE_KEYS.token);
         localStorage.removeItem(STORAGE_KEYS.userName);
         localStorage.removeItem(STORAGE_KEYS.profile);
