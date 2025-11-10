@@ -1,4 +1,4 @@
-import { getPost, deletePost } from "../api/post.js";
+import { getPost} from "../api/post.js";
 
 const msgEl = document.querySelector("#msg");
 const postEl = document.querySelector("#post");

@@ -108,11 +108,11 @@ if (isMine) {
     wrapper.append(editForm);
 
     editBtn.addEventListener("click", () => {
-        editForm.style.display = editForm.style.display === "none" ? "grid" : "none";
+        editForm.classList.toggle("hidden");
     });
 
     cancelBtn.addEventListener("click", () => {
-        editForm.style.display = "none";
+        editForm.classList.add("hidden");
     });
 
     editForm.addEventListener("submit", async (e) => {
