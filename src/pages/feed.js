@@ -19,15 +19,11 @@ const createForm = document.querySelector("#create-form");
 
 function postCard(post) {
     const wrapper = document.createElement("article");
-    wrapper.style.padding = "1rem";
-    wrapper.style.border = "1px solid #263041";
-    wrapper.style.borderRadius = "12px";
-    wrapper.style.marginBottom = "12px";
-    wrapper.style.background = "#131720";
+    wrapper.className ="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-md hover:shadow-lg transition";
 
     const title = document.createElement("h3");
     title.textContent = post.title || "(untitled)";
-    title.style.cursor = "pointer";
+    title.className = "text-lg font-semibold text-indigo-400 cursor-pointer hover:underline";
     title.addEventListener("click", () => {
     location.href = `./post.html?id=${post.id}`;
 });
@@ -42,23 +38,18 @@ function postCard(post) {
         const img = document.createElement("img");
         img.src = mediaUrl;
         img.alt = post.media?.alt || "";
-        img.style.width = "100%";
-        img.style.borderRadius = "10px";
-        img.style.marginTop = "8px";
+        img.className = "w-full rounded-xl mt-3";
         wrapper.append(img);
     }
 
     const footer = document.createElement("div");
-    footer.style.display = "flex";
-    footer.style.gap = "8px";
-    footer.style.alignItems = "center";
-    footer.style.marginTop = "8px";
+    footer.className = "flex items-center gap-3 mt-4";
 
     const by = document.createElement("small");
     const author = post.author?.name;
 
     if (author) {
-        by.innerHTML = `by <a href="./profile.html?name=${encodeURIComponent(author)}">${author}</a>`;
+        by.innerHTML = `by <a class="text-indigo-400 hover:underline" href="./profile.html?name=${encodeURIComponent(author)}">${author}</a>`;
     } else {
         by.textContent = "by unknown";
     }
@@ -81,11 +72,7 @@ if (isMine) {
     footer.append(editBtn, delBtn);
 
     const editForm = document.createElement("form");
-    editForm.style.display = "none";
-    editForm.style.marginTop = "10px";
-    editForm.style.display = "none";
-    editForm.style.gap = "8px";
-    editForm.style.gridTemplateColumns = "1fr";
+    editForm.className ="hidden mt-3 grid gap-2 grid-cols-1 bg-gray-800 p-3 rounded-xl";
 
     const titleInput = document.createElement("input");
     titleInput.name = "title";
