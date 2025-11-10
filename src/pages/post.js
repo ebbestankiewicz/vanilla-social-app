@@ -32,15 +32,15 @@ function renderPost(post) {
     }
 
     const wrapper = document.createElement("article");
-    wrapper.style.padding = "1rem";
-    wrapper.style.border = "1px solid #263041";
-    wrapper.style.borderRadius = "12px";
-    wrapper.style.background = "#131720";
+    wrapper.className = "bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-md";
 
     const title = document.createElement("h2");
     title.textContent = post.title || "(untitled)";
+    title.className = "text-2xl font-bold text-indigo-400";
+
     const body = document.createElement("p");
     body.textContent = post.body || "";
+    body.className = "text-gray-300 mt-2";
 
     wrapper.append(title, body);
 
@@ -48,8 +48,7 @@ function renderPost(post) {
         const img = document.createElement("img");
         img.src = post.media.url;
         img.alt = post.media.alt || "";
-        img.style.width = "100%";
-        img.style.marginTop = "1rem";
+        img.className = "w-full rounded-lg mt-4";
         wrapper.append(img);
     }
 
@@ -58,6 +57,7 @@ function renderPost(post) {
     by.innerHTML = author
     ? `by <a href="./profile.html?name=${encodeURIComponent(author)}">${author}</a>`
     : "by unknown";
+    by.className = "block mt-4 text-sm text-gray-400";
     wrapper.append(by);
 
     if (postEl) {
