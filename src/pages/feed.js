@@ -137,7 +137,6 @@ if (isMine) {
     });
 
     delBtn.addEventListener("click", async () => {
-        if (!confirm("Delete this post?")) return;
         try {
             await deletePost(post.id);
             await loadFeed(searchInput?.value?.trim() ?? "");
@@ -294,8 +293,6 @@ if (logoutBtn) {
         localStorage.removeItem(STORAGE_KEYS.token);
         localStorage.removeItem(STORAGE_KEYS.userName);
         localStorage.removeItem(STORAGE_KEYS.profile);
-
-        alert("You have been logged out.");
         location.href = "./login.html";
         });
     }
