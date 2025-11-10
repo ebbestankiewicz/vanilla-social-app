@@ -6,7 +6,6 @@ const token = getFromLocalStorage(STORAGE_KEYS.token);
 if (!token) location.href = "./login.html";
 
 
-// --- DOM elements
 const profileTitle = document.getElementById("profileTitle");
 const profileInfo = document.getElementById("profileInfo");
 const avatarImg = document.getElementById("avatar");
@@ -19,7 +18,6 @@ const whoEl = document.getElementById("who");
 const msgEl = document.getElementById("msg");
 
 
-// --- Get profile name from URL or storage
 const params = new URLSearchParams(location.search);
 const name = (params.get("name") || getFromLocalStorage(STORAGE_KEYS.userName) || "").trim();
 if (!name) {
@@ -29,6 +27,18 @@ if (!name) {
 whoEl.textContent = name;
 profileTitle.textContent = `Profile: ${name}`;
 
+/**
+ * Create a DOM card element for a single post.
+ *
+ * @param {Object} post - The post object.
+ * @param {number|string} post.id - Post ID.
+ * @param {string} [post.title] - Post title.
+ * @param {string} [post.body] - Post body text.
+ * @param {Object} [post.media] - Media object, if present.
+ * @param {string} post.media.url - Image URL.
+ * @param {string} [post.media.alt] - Alt text.
+ * @returns {HTMLElement} The rendered post card element.
+ */
 function postCard(post) {
     const card = document.createElement("article");
     card.style.padding = "1rem";
@@ -61,7 +71,13 @@ function postCard(post) {
     return card;
 }
 
-// --- Load profile data
+/**
+ * Fetch and render profile information for the current profile page.
+ *
+ * Loads avatar, email, follower counts, and follow/unfollow button state.
+ *
+ * @returns {Promise<void>}
+ */
 async function loadProfile() {
     try {
         msgEl.textContent = "";
@@ -97,7 +113,10 @@ async function loadProfile() {
     }
     }
 
-// --- Load profile posts
+    /**
+ * Fetch and render all posts belonging to the current profile user.
+ * @returns {Promise<void>}
+ */
     async function loadPosts() {
     try {
         postsWrap.textContent = "Loading…";
@@ -114,7 +133,7 @@ async function loadProfile() {
     }
     }
 
-// --- Follow / Unfollow handlers
+
     followBtn?.addEventListener("click", async () => {
     try {
         followBtn.disabled = true;
