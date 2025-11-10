@@ -133,7 +133,10 @@ async function loadProfile() {
     }
     }
 
-
+/**
+ * Follow the currently viewed profile and refresh the header state.
+ * @returns {Promise<void>}
+ */
     followBtn?.addEventListener("click", async () => {
     try {
         followBtn.disabled = true;
@@ -146,6 +149,10 @@ async function loadProfile() {
     }
     });
 
+    /**
+ * Unfollow the currently viewed profile and refresh the header state.
+ * @returns {Promise<void>}
+ */
     unfollowBtn?.addEventListener("click", async () => {
     try {
         unfollowBtn.disabled = true;
