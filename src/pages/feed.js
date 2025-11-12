@@ -18,26 +18,39 @@ const searchStatus = document.querySelector("#searchStatus");
 const createForm = document.querySelector("#create-form");
 
 function postCard(post) {
+    const {
+        id,
+        title: postTitle = "(untitled)",
+        body: postBody = "",
+        media,
+        author,
+    } = post ?? {};
+    const mediaUrl = media?.url;
+    const mediaAlt = media?.alt || "";
+    const authorName = author?.name || "";
+    const authorNameLower = authorName.toLowerCase();
+
     const wrapper = document.createElement("article");
-    wrapper.className ="bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-md hover:shadow-lg transition";
+    wrapper.className =
+        "bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-md hover:shadow-lg transition";
 
-    const title = document.createElement("h3");
-    title.textContent = post.title || "(untitled)";
-    title.className = "text-lg font-semibold text-indigo-400 cursor-pointer hover:underline";
-    title.addEventListener("click", () => {
-    location.href = `./post.html?id=${post.id}`;
-});
+    const titleEl = document.createElement("h3");
+    titleEl.textContent = postTitle;
+    titleEl.className = "text-lg font-semibold text-indigo-400 cursor-pointer hover:underline";
+    titleEl.addEventListener("click", () => {
+        location.href = `./post.html?id=${id}`;
+    });
 
-    const body = document.createElement("p");
-    body.textContent = post.body || "";
+    const bodyEl = document.createElement("p");
+    bodyEl.textContent = postBody;
+    bodyEl.className = "text-gray-300 mt-2";
 
-    wrapper.append(title, body);
+    wrapper.append(titleEl, bodyEl);
 
-    const mediaUrl = post.media?.url;
     if (mediaUrl) {
         const img = document.createElement("img");
         img.src = mediaUrl;
-        img.alt = post.media?.alt || "";
+        img.alt = mediaAlt;
         img.className = "w-full rounded-xl mt-3";
         wrapper.append(img);
     }
@@ -46,108 +59,109 @@ function postCard(post) {
     footer.className = "flex items-center gap-3 mt-4";
 
     const by = document.createElement("small");
-    const author = post.author?.name;
+    by.innerHTML = authorName
+        ? `by <a class="text-indigo-400 hover:underline" href="./profile.html?name=${encodeURIComponent(authorName)}">${authorName}</a>`
+        : "by unknown";
+    footer.append(by);
 
-    if (author) {
-        by.innerHTML = `by <a class="text-indigo-400 hover:underline" href="./profile.html?name=${encodeURIComponent(author)}">${author}</a>`;
-    } else {
-        by.textContent = "by unknown";
-    }
-footer.append(by);
+    const currentUserNameLower = (currentUserName || "").toLowerCase();
+    const isMine = !!authorNameLower && !!currentUserNameLower && authorNameLower === currentUserNameLower;
 
-const authorName = (post.author?.name || "").toLowerCase();
-const isMine = !!authorName && !!currentUserName && authorName === currentUserName;
+    if (isMine) {
+        const spacer = document.createElement("div");
+        spacer.className = "flex-1";
+        footer.append(spacer);
 
-if (isMine) {
-    const spacer = document.createElement("div");
-    spacer.className = "flex-1";
-    footer.append(spacer);
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.className =
+        "px-3 py-1.5 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-100";
 
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.className = "px-3 py-1.5 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-100";
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white";
 
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "Delete";
-    delBtn.className = "px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white";
+        footer.append(editBtn, delBtn);
 
-    footer.append(editBtn, delBtn);
+        const editForm = document.createElement("form");
+        editForm.className = "hidden mt-3 grid gap-2 grid-cols-1 bg-gray-800 p-3 rounded-xl";
 
-    const editForm = document.createElement("form");
-    editForm.className ="hidden mt-3 grid gap-2 grid-cols-1 bg-gray-800 p-3 rounded-xl";
+        const titleInput = document.createElement("input");
+        titleInput.name = "title";
+        titleInput.value = postTitle;
+        titleInput.placeholder = "Title";
+        titleInput.className =
+        "rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
 
-    const titleInput = document.createElement("input");
-    titleInput.name = "title";
-    titleInput.value = post.title || "";
-    titleInput.placeholder = "Title";
-    titleInput.className = "rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
+        const bodyInput = document.createElement("textarea");
+        bodyInput.name = "body";
+        bodyInput.value = postBody;
+        bodyInput.placeholder = "Say something…";
+        bodyInput.className =
+        "min-h-[90px] rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
 
-    const bodyInput = document.createElement("textarea");
-    bodyInput.name = "body";
-    bodyInput.value = post.body || "";
-    bodyInput.placeholder = "Say something…";
-    bodyInput.className = "min-h-[90px] rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
+        const mediaInput = document.createElement("input");
+        mediaInput.name = "mediaUrl";
+        mediaInput.placeholder = "Image URL";
+        mediaInput.value = mediaUrl || "";
+        mediaInput.className =
+        "rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
 
-    const mediaInput = document.createElement("input");
-    mediaInput.name = "mediaUrl";
-    mediaInput.placeholder = "Image URL";
-    mediaInput.value = post.media?.url || "";
-    mediaInput.className = "rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500";
+        const saveBtn = document.createElement("button");
+        saveBtn.type = "submit";
+        saveBtn.textContent = "Save";
+        saveBtn.className = "px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold";
 
-    const saveBtn = document.createElement("button");
-    saveBtn.type = "submit";
-    saveBtn.textContent = "Save";
-    saveBtn.className = "px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold";
+        const cancelBtn = document.createElement("button");
+        cancelBtn.type = "button";
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.className =
+        "px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-100";
 
-    const cancelBtn = document.createElement("button");
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "Cancel";
-    cancelBtn.className = "px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 hover:bg-gray-700 text-gray-100";
+        editForm.append(titleInput, bodyInput, mediaInput, saveBtn, cancelBtn);
+        wrapper.append(editForm);
 
-    editForm.append(titleInput, bodyInput, mediaInput, saveBtn, cancelBtn);
-    wrapper.append(editForm);
-
-    editBtn.addEventListener("click", () => {
+        editBtn.addEventListener("click", () => {
         editForm.classList.toggle("hidden");
-    });
-
-    cancelBtn.addEventListener("click", () => {
+        });
+        cancelBtn.addEventListener("click", () => {
         editForm.classList.add("hidden");
-    });
+        });
 
-    editForm.addEventListener("submit", async (e) => {
+        editForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         try {
             const newTitle = titleInput.value.trim() || undefined;
             const newBody = bodyInput.value.trim() || undefined;
             const newMediaUrl = mediaInput.value.trim();
-            const media = newMediaUrl ? { url: newMediaUrl } : undefined;
+            const newMedia = newMediaUrl ? { url: newMediaUrl } : undefined;
 
-            await updatePost(post.id, { title: newTitle, body: newBody, media });
+            await updatePost(id, { title: newTitle, body: newBody, media: newMedia });
             await loadFeed(searchInput?.value?.trim() ?? "");
             msgEl.textContent = "Post updated";
             setTimeout(() => (msgEl.textContent = ""), 1500);
         } catch (err) {
             alert(err.message || "Failed to update post");
         }
-    });
+        });
 
-    delBtn.addEventListener("click", async () => {
+        delBtn.addEventListener("click", async () => {
         if (!confirm("Delete this post? This cannot be undone.")) return;
         try {
-            await deletePost(post.id);
+            await deletePost(id);
             await loadFeed(searchInput?.value?.trim() ?? "");
             msgEl.textContent = "Post deleted 🗑️";
             setTimeout(() => (msgEl.textContent = ""), 1500);
         } catch (err) {
             alert(err.message || "Failed to delete post");
         }
-    });
-}
+        });
+    }
 
     wrapper.append(footer);
     return wrapper;
 }
+
 
 async function loadFeed(q = "") {
     if (!feedEl || !msgEl) return;
@@ -217,32 +231,31 @@ function debounce(fn, ms = 300) {
 }
 const debouncedSearch = debounce((q) => performSearch(q), 350);
 
-// Search button
+
 searchBtn?.addEventListener("click", () => {
     const q = searchInput?.value?.trim() ?? "";
     performSearch(q);
 });
 
-// Live search input
+
 searchInput?.addEventListener("input", () => {
     const q = searchInput.value.trim();
     debouncedSearch(q);
 });
 
-// Enter key to search
+
 searchInput?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         e.preventDefault();
         performSearch(searchInput.value.trim());
     }
-    // Escape key to clear
+
     if (e.key === "Escape") {
         searchInput.value = "";
         performSearch("");
     }
 });
 
-// Clear search button
 clearSearchBtn?.addEventListener("click", () => {
     searchInput.value = "";
     performSearch("");
@@ -273,7 +286,7 @@ if (createForm) {
     });
 }
 
-// Logout button
+
 const logoutBtn = document.querySelector("#logoutBtn");
 
 function isLoggedIn() {
