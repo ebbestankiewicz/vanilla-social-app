@@ -4,7 +4,7 @@ A small social media web app built with vanilla JavaScript (ES6 modules), Tailwi
 Users can register, log in, create, update, delete, and search posts; view profiles; and follow/unfollow.
 
 Live Demo
-URL:
+URL:https://codel-social.netlify.app/
 
 Features
 
