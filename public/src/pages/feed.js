@@ -32,7 +32,7 @@ function postCard(post) {
 
     const wrapper = document.createElement("article");
     wrapper.className =
-        "bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-md hover:shadow-lg transition";
+        "bg-gray-900 border border-gray-800 rounded-2xl p-4 shadow-md hover:shadow-lg transition max-w-xl mx-auto";
 
     const titleEl = document.createElement("h3");
     titleEl.textContent = postTitle;
@@ -51,7 +51,7 @@ function postCard(post) {
         const img = document.createElement("img");
         img.src = mediaUrl;
         img.alt = mediaAlt;
-        img.className = "w-full rounded-xl mt-3";
+        img.className = "w-full rounded-xl mt-3 object-cover max-h-96";
         wrapper.append(img);
     }
 
